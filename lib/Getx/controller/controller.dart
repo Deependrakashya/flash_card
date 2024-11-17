@@ -5,9 +5,19 @@ import 'package:get/get.dart';
 
 class Controller extends GetxController {
   RxList<FlashCardModel> flashCardList = <FlashCardModel>[].obs;
+  RxBool clearAllButton = false.obs;
   FlashCardDB? database = FlashCardDB();
   TextEditingController query = TextEditingController();
   TextEditingController ans = TextEditingController();
+
+  void toogleTextclearButton() {
+    if (query.text.isNotEmpty || ans.text.isNotEmpty) {
+      clearAllButton.value = true;
+    }
+    if (query.text.isEmpty && ans.text.isEmpty) {
+      clearAllButton.value = false;
+    }
+  }
 
   void fetchList() async {
     flashCardList.value = await database!.getStoredData();

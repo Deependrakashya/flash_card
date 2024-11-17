@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 Widget flashCardItem({
-  required String title,
+  required String cardText,
   required BuildContext context,
   required Controller controller,
   required int index,
@@ -57,7 +57,7 @@ Widget flashCardItem({
                 children: [
                   Text(
                     cardTitle,
-                    style: TextStyle(fontWeight: FontWeight.w700),
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -125,8 +125,8 @@ Widget flashCardItem({
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                title,
-                style: TextStyle(fontWeight: FontWeight.w500),
+                cardText,
+                style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
           ],

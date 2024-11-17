@@ -15,6 +15,12 @@ class AddNewQna extends StatefulWidget {
 
 class _AddNewQnaState extends State<AddNewQna> {
   @override
+  void initState() {
+    super.initState();
+    widget.controller.toogleTextclearButton();
+  }
+
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
@@ -42,11 +48,13 @@ class _AddNewQnaState extends State<AddNewQna> {
             children: [
               Column(
                 children: [
-                  textInput("What's Your Question", widget.controller.query),
+                  textInput("What's Your Question", widget.controller.query,
+                      widget.controller),
                   SizedBox(
                     height: 20,
                   ),
-                  textInput("Type Your Answer", widget.controller.ans),
+                  textInput("Type Your Answer", widget.controller.ans,
+                      widget.controller),
                 ],
               ),
               SizedBox(
@@ -56,17 +64,30 @@ class _AddNewQnaState extends State<AddNewQna> {
                 verticalDirection: VerticalDirection.down,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  TextButton(onPressed: () {
+                    widget.controller.query.text = '';
+                    widget.controller.ans.text = '';
+                    widget.controller.toogleTextclearButton();
+                  }, child: Obx(() {
+                    return widget.controller.clearAllButton.value
+                        ? Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 10),
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Text(
+                              'Clear all',
+                              style: TextStyle(
+                                  color: AppColors.whiteBgColor,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          )
+                        : SizedBox();
+                  })),
                   ElevatedButton(
-                      onPressed: () {
-                        widget.controller.query.text = '';
-                        widget.controller.ans.text = '';
-                      },
-                      child: Icon(
-                        Icons.delete,
-                        color: AppColors.teritiaryTextColor,
-                      )),
-                  ElevatedButton(
-                      style: ButtonStyle(),
+                      style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.grey)),
                       onPressed: () {
                         if (widget.controller.query.text.isEmpty) {
                           Get.defaultDialog(
@@ -86,7 +107,7 @@ class _AddNewQnaState extends State<AddNewQna> {
                       },
                       child: Icon(
                         Icons.save,
-                        color: AppColors.teritiaryTextColor,
+                        color: AppColors.whiteBgColor,
                       )),
                 ],
               )

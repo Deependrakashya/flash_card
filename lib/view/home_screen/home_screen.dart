@@ -118,7 +118,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                         alignment: Alignment.center,
                         child: isFrontVisible
                             ? flashCardItem(
-                                title: flashCard.query.toString(),
+                                cardText: flashCard.query.toString(),
                                 context: context,
                                 controller: controller,
                                 index: flashCard.id!.toInt(),
@@ -130,7 +130,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                                 transform: Matrix4.identity()..rotateY(pi),
                                 alignment: Alignment.center,
                                 child: flashCardItem(
-                                  title: flashCard.ans.toString(),
+                                  cardText: flashCard.ans.toString(),
                                   context: context,
                                   controller: controller,
                                   index: flashCard.id!.toInt(),

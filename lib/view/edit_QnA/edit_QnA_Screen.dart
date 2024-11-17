@@ -63,11 +63,13 @@ class _EditQnaScreenState extends State<EditQnaScreen> {
             children: [
               Column(
                 children: [
-                  textInput("Edit Your Question", widget.controller.query),
+                  textInput("Edit Your Question", widget.controller.query,
+                      widget.controller),
                   SizedBox(
                     height: 20,
                   ),
-                  textInput("Edit Your Answer", widget.controller.ans),
+                  textInput("Edit Your Answer", widget.controller.ans,
+                      widget.controller),
                 ],
               ),
               SizedBox(
@@ -104,8 +106,21 @@ class _EditQnaScreenState extends State<EditQnaScreen> {
                   ElevatedButton(
                       style: ButtonStyle(),
                       onPressed: () {
-                        widget.controller.editQna(widget.id);
-                        Navigator.pop(context);
+                        if (widget.controller.query.text.isEmpty) {
+                          Get.defaultDialog(
+                              title: 'Error',
+                              middleText: 'Question can not be empty !',
+                              titleStyle: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
+                              onConfirm: () {
+                                Navigator.pop(context);
+                              });
+                        } else {
+                          widget.controller.editQna(widget.id);
+                          Navigator.pop(context);
+                        }
                       },
                       child: Icon(
                         Icons.save,
