@@ -25,4 +25,11 @@ class Controller extends GetxController {
     print(data);
     fetchList();
   }
+
+  void editQna(int id) async {
+    var data = await database!
+        .update(FlashCardModel(id: id, query: query.text, ans: ans.text));
+    print(data);
+    fetchList();
+  }
 }

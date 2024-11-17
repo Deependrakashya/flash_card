@@ -5,6 +5,7 @@ import 'package:flash_card/view/edit_QnA/edit_QnA_Screen.dart';
 import 'package:flash_card/view/view_QnA/view_QnA_screen/view_QnA_screen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 Widget flashCardItem({
   required String title,
@@ -17,8 +18,8 @@ Widget flashCardItem({
 }) {
   return Container(
       width: MediaQuery.of(context).size.width,
-      height: 180,
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.only(bottom: 50),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(7),
           color: AppColors.whiteBgColor,
@@ -56,6 +57,7 @@ Widget flashCardItem({
                 children: [
                   Text(
                     cardTitle,
+                    style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -88,7 +90,23 @@ Widget flashCardItem({
                       ),
                       InkWell(
                         onTap: () {
-                          controller.delete(index);
+                          Get.defaultDialog(
+                            title: 'Delete',
+                            middleText: 'Do you want to delete this?',
+                            middleTextStyle: TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                            titleStyle: TextStyle(
+                                color: Colors.red,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700),
+                            onConfirm: () {
+                              controller.delete(index);
+                              Navigator.pop(context);
+                            },
+                            onCancel: () {},
+                          );
                         },
                         child: const Icon(
                           Icons.delete,
@@ -108,6 +126,7 @@ Widget flashCardItem({
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 title,
+                style: TextStyle(fontWeight: FontWeight.w500),
               ),
             ),
           ],

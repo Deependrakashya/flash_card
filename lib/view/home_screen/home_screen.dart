@@ -94,55 +94,58 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           );
         }
 
-        return ListView.builder(
-          itemCount: controller.flashCardList.length,
-          itemBuilder: (context, index) {
-            final cardState = cardStates![index];
-            final flashCard = controller.flashCardList[index];
+        return Container(
+          margin: EdgeInsets.only(bottom: 60),
+          child: ListView.builder(
+            itemCount: controller.flashCardList.length,
+            itemBuilder: (context, index) {
+              final cardState = cardStates![index];
+              final flashCard = controller.flashCardList[index];
 
-            return Center(
-              child: GestureDetector(
-                onTap: cardState.flipCard,
-                child: AnimatedBuilder(
-                  animation: cardState.animation,
-                  builder: (context, child) {
-                    final angle = cardState.animation.value * pi;
-                    final isFrontVisible = angle < pi / 2;
+              return Center(
+                child: GestureDetector(
+                  onTap: cardState.flipCard,
+                  child: AnimatedBuilder(
+                    animation: cardState.animation,
+                    builder: (context, child) {
+                      final angle = cardState.animation.value * pi;
+                      final isFrontVisible = angle < pi / 2;
 
-                    return Transform(
-                      transform: Matrix4.identity()
-                        ..setEntry(3, 2, 0.001) // Perspective
-                        ..rotateY(angle),
-                      alignment: Alignment.center,
-                      child: isFrontVisible
-                          ? flashCardItem(
-                              title: flashCard.query.toString(),
-                              context: context,
-                              controller: controller,
-                              index: flashCard.id!.toInt(),
-                              cardTitle: 'Question',
-                              ans: flashCard.ans.toString(),
-                              question: flashCard.query.toString(),
-                            )
-                          : Transform(
-                              transform: Matrix4.identity()..rotateY(pi),
-                              alignment: Alignment.center,
-                              child: flashCardItem(
-                                title: flashCard.ans.toString(),
+                      return Transform(
+                        transform: Matrix4.identity()
+                          ..setEntry(3, 2, 0.001) // Perspective
+                          ..rotateY(angle),
+                        alignment: Alignment.center,
+                        child: isFrontVisible
+                            ? flashCardItem(
+                                title: flashCard.query.toString(),
                                 context: context,
                                 controller: controller,
                                 index: flashCard.id!.toInt(),
-                                cardTitle: 'Answer',
+                                cardTitle: 'Question',
                                 ans: flashCard.ans.toString(),
                                 question: flashCard.query.toString(),
+                              )
+                            : Transform(
+                                transform: Matrix4.identity()..rotateY(pi),
+                                alignment: Alignment.center,
+                                child: flashCardItem(
+                                  title: flashCard.ans.toString(),
+                                  context: context,
+                                  controller: controller,
+                                  index: flashCard.id!.toInt(),
+                                  cardTitle: 'Answer',
+                                  ans: flashCard.ans.toString(),
+                                  question: flashCard.query.toString(),
+                                ),
                               ),
-                            ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         );
       }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

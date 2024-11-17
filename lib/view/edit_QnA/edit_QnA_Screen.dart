@@ -1,5 +1,6 @@
 import 'package:flash_card/Getx/controller/controller.dart';
 import 'package:flash_card/utls/app_colors.dart';
+import 'package:flash_card/view/home_screen/home_screen.dart';
 import 'package:flash_card/view/widgets/add_new_QnA_views.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,11 @@ class _EditQnaScreenState extends State<EditQnaScreen> {
     super.initState();
     widget.controller.query.text = widget.query;
     widget.controller.ans.text = widget.ans;
+  }
+
+  void deleteButton() {
+    widget.controller.delete(widget.id);
+    Navigator.pop(context);
   }
 
   @override
@@ -73,8 +79,23 @@ class _EditQnaScreenState extends State<EditQnaScreen> {
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                        widget.controller.delete(widget.id);
-                        Navigator.pop(context);
+                        Get.defaultDialog(
+                          title: 'Delete',
+                          middleText: 'Do you want to delete this?',
+                          middleTextStyle: TextStyle(
+                              color: Colors.red,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+                          titleStyle: TextStyle(
+                              color: Colors.red,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700),
+                          onConfirm: () {
+                            deleteButton();
+                            Navigator.pop(context);
+                          },
+                          onCancel: () {},
+                        );
                       },
                       child: Icon(
                         Icons.delete,
@@ -83,7 +104,7 @@ class _EditQnaScreenState extends State<EditQnaScreen> {
                   ElevatedButton(
                       style: ButtonStyle(),
                       onPressed: () {
-                        widget.controller.insertData();
+                        widget.controller.editQna(widget.id);
                         Navigator.pop(context);
                       },
                       child: Icon(
