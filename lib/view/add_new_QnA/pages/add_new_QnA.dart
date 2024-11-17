@@ -3,6 +3,7 @@ import 'package:flash_card/utls/app_colors.dart';
 import 'package:flash_card/view/widgets/add_new_QnA_views.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddNewQna extends StatefulWidget {
   Controller controller;
@@ -67,8 +68,21 @@ class _AddNewQnaState extends State<AddNewQna> {
                   ElevatedButton(
                       style: ButtonStyle(),
                       onPressed: () {
-                        widget.controller.insertData();
-                        Navigator.pop(context);
+                        if (widget.controller.query.text.isEmpty) {
+                          Get.defaultDialog(
+                              title: 'Error',
+                              middleText: 'Question can not be empty !',
+                              onConfirm: () {
+                                Navigator.pop(context);
+                              },
+                              titleStyle: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600));
+                        } else {
+                          widget.controller.insertData();
+                          Navigator.pop(context);
+                        }
                       },
                       child: Icon(
                         Icons.save,

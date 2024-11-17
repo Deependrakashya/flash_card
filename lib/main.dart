@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Colors.black)))),
+                  shadowColor: WidgetStatePropertyAll(Colors.black),
+                  backgroundColor: WidgetStatePropertyAll(Colors.white)))),
       home: MainScreen(),
     );
   }
