@@ -1,16 +1,39 @@
-# flash_card
+# Flashcard App
 
-A new Flutter project.
+A simple and user-friendly Flashcard app built with Flutter. This app allows users to create, view, edit, and delete flashcards to help with learning and memorization.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Download the APK
 
-A few resources to get you started if this is your first Flutter project:
+Download the latest version of the Flashcard App APK from the link below:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Download Flashcard App APK](https://github.com/Deependrakashya/flash_card/releases/download/Release/flash_card.apk)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🚀 Features
+
+### Main Screen
+- Display a list of flashcards with **questions**.
+- Tap a flashcard to reveal its **answer**.
+- Edit or delete flashcards directly from the list.
+
+### Add Flashcard
+- Add new flashcards with a **question** and **answer**.
+- **Form validation** ensures required fields are filled.
+
+### Edit Flashcard
+- Update existing flashcards.
+- Pre-filled forms make editing simple.
+
+### Delete Flashcard
+- Confirm before deleting a flashcard to prevent accidental deletion.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Flutter**: Cross-platform app development.
+- **Dart**: Programming language.
+- **Hive/Shared Preferences** (optional): For local data storage.
